@@ -8,12 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var PokeC: PokeController;
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, Tdroid!")
+            NavigationView {
+                VStack {
+                    
+                    Text("Ipoke")
+                        .font(.custom("GODOFWAR", size: 50))
+
+                    
+                    List {
+                        ForEach(PokeC.resultData, id: \.name) { pokemon in
+                            Text("\(pokemon.name)")
+                        }
+                    }
+                }
+            }
         }
         .padding()
     }

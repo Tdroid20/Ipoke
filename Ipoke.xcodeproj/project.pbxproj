@@ -11,6 +11,9 @@
 		497B371628E36B3600121306 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B371528E36B3600121306 /* ContentView.swift */; };
 		497B371828E36B3600121306 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 497B371728E36B3600121306 /* Assets.xcassets */; };
 		497B371B28E36B3600121306 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 497B371A28E36B3600121306 /* Preview Assets.xcassets */; };
+		497B372428E36ECD00121306 /* PokeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B372328E36ECD00121306 /* PokeController.swift */; };
+		497B372628E377B700121306 /* PokeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497B372528E377B700121306 /* PokeModel.swift */; };
+		497B372A28E38C0300121306 /* pokemon in Resources */ = {isa = PBXBuildFile; fileRef = 497B372928E38C0300121306 /* pokemon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +23,12 @@
 		497B371728E36B3600121306 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		497B371A28E36B3600121306 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		497B372128E36BC900121306 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		497B372328E36ECD00121306 /* PokeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeController.swift; sourceTree = "<group>"; };
+		497B372528E377B700121306 /* PokeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeModel.swift; sourceTree = "<group>"; };
+		497B372928E38C0300121306 /* pokemon */ = {isa = PBXFileReference; lastKnownFileType = folder; path = pokemon; sourceTree = "<group>"; };
+		497B372B28E38CE900121306 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		497B372C28E3906100121306 /* PokemonHollow.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PokemonHollow.ttf; sourceTree = "<group>"; };
+		497B372D28E3906400121306 /* PokemonSolid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PokemonSolid.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +62,9 @@
 		497B371228E36B3600121306 /* Ipoke */ = {
 			isa = PBXGroup;
 			children = (
+				497B372B28E38CE900121306 /* Info.plist */,
+				497B372728E38BC200121306 /* Assets */,
+				497B372228E36E6D00121306 /* Controller */,
 				497B371328E36B3600121306 /* IpokeApp.swift */,
 				497B371528E36B3600121306 /* ContentView.swift */,
 				497B371728E36B3600121306 /* Assets.xcassets */,
@@ -64,9 +76,36 @@
 		497B371928E36B3600121306 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				497B372D28E3906400121306 /* PokemonSolid.ttf */,
+				497B372C28E3906100121306 /* PokemonHollow.ttf */,
 				497B371A28E36B3600121306 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		497B372228E36E6D00121306 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				497B372328E36ECD00121306 /* PokeController.swift */,
+				497B372528E377B700121306 /* PokeModel.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		497B372728E38BC200121306 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				497B372828E38BCA00121306 /* Fonts */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		497B372828E38BCA00121306 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				497B372928E38C0300121306 /* pokemon */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,6 +166,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497B372A28E38C0300121306 /* pokemon in Resources */,
 				497B371B28E36B3600121306 /* Preview Assets.xcassets in Resources */,
 				497B371828E36B3600121306 /* Assets.xcassets in Resources */,
 			);
@@ -140,6 +180,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				497B371628E36B3600121306 /* ContentView.swift in Sources */,
+				497B372428E36ECD00121306 /* PokeController.swift in Sources */,
+				497B372628E377B700121306 /* PokeModel.swift in Sources */,
 				497B371428E36B3600121306 /* IpokeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,6 +314,7 @@
 				DEVELOPMENT_TEAM = SYWY3FGBS5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ipoke/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -301,6 +344,7 @@
 				DEVELOPMENT_TEAM = SYWY3FGBS5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Ipoke/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
