@@ -9,13 +9,14 @@ import Foundation;
 
 class PokeController: ObservableObject {
     @Published var resultData: [PokeResultModel] = [];
+    @Published var resultDataFetch: PokeFetch?;
     
     init() {
         findAll()
     }
     
-    func findAll(offset: Int = 0) {
-        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=10&offset=\(offset)") else {
+    func findAll(limit: Int = 10, offset: Int = 0) {
+        guard let url = URL(string: "https://pokeapi.co/api/v2/pokemon?limit=\(limit)&offset=\(offset)") else {
             return print("URL Not Found")
         }
         URLSession.shared.dataTask(with: url) { (data, res, error) in
@@ -28,6 +29,7 @@ class PokeController: ObservableObject {
                     let result: PokeFetch = try JSONDecoder().decode(PokeFetch.self, from: data);
                     
                     self.resultData = result.results;
+                    self.resultDataFetch = result;
                 } catch {
                     return print("Error in Get Data Request: \(error)")
                     
