@@ -6,10 +6,12 @@
 //
 
 import Foundation;
+import SwiftUI;
 
 class PokeController: ObservableObject {
     @Published var resultData: [PokeResultModel] = [];
     @Published var resultDataFetch: PokeFetch?;
+    @Published var resultIndAllFetch: [PokeFetchManiplation] = [];
     
     init() {
         findAll()
@@ -30,11 +32,41 @@ class PokeController: ObservableObject {
                     
                     self.resultData = result.results;
                     self.resultDataFetch = result;
+                    for a in self.resultData {
+                        self.findAllInd(URLGet: a.url)
+                        print(a.url)
+                    }
                 } catch {
                     return print("Error in Get Data Request: \(error)")
                     
                 }
                 
+            }
+            
+        }.resume()
+    }
+    
+    func findAllInd(URLGet: String) {
+        let url = URL(string: URLGet)!
+        
+        URLSession.shared.dataTask(with: url) { (data, res, error) in
+            if error != nil {
+                return print("Error in request data session: \(error!)")
+            }
+            
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder();
+                    
+                    //decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    
+                    let result: PokeFetchManiplation = try decoder.decode(PokeFetchManiplation.self, from: data);
+                    print(result)
+                    self.resultIndAllFetch.append(result)
+                    
+                } catch {
+                    return print("Error in Get Data Request: \(error)")
+                }
             }
             
         }.resume()
