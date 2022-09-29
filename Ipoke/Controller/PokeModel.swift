@@ -22,7 +22,7 @@ struct PokeResultModel: Codable {
 struct PokeIndModel: Codable {
     var name: String = "Name is Not Defined"
     var base_experience: Int = 0;
-    var sprites: PokeSpritesContentModel?;
+    var sprites: Sprite = Sprite();
     var species: PokeSpecies?;
     var stats: [PokeStats]?;
     private enum CodingKeys: String, CodingKey {
@@ -32,6 +32,24 @@ struct PokeIndModel: Codable {
         case species = "species"
         case stats = "stats"
     }
+}
+
+struct Sprite: Codable {
+    var front_default:String = ""
+    var other: OfficialArtWork = OfficialArtWork()
+    
+}
+
+
+struct OfficialArtWork: Codable {
+    var artWork: FrontDefault = FrontDefault()
+    private enum CodingKeys: String, CodingKey {
+        case artWork = "official-artwork"
+    }
+}
+
+struct FrontDefault: Codable {
+    var front_default: String = ""
 }
 
 struct PokeSpecies: Codable {

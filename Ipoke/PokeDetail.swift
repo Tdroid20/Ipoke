@@ -22,9 +22,13 @@ struct PokeDetail: View {
             Form() {
                 Section {
                 VStack {
-                    AsyncImage(url: URL(string: PokeC.resultPokemonInd.sprites?.frontDefault ?? ""))
-                        .scaleEffect(2)
-                        .scaledToFill()
+                    AsyncImage(url: URL(string: PokeC.resultPokemonInd.sprites.other.artWork.front_default)) { image in
+                        image.resizable()
+                        
+                    } placeholder: {
+                        Color(.gray)
+                    }
+                        
                         .frame(width: 350, height: 300, alignment: .center)
                         
                     
@@ -64,7 +68,8 @@ struct PokeDetail: View {
                                     Text("\(item.stat!.name):") + Text(" \(item.base_stat)").foregroundColor(.green)
                                     
                                     ProgressView(value: Float(item.base_stat), total: 233)
-                                        .foregroundColor(.green)
+                                        .tint(Color.green)
+                                        
                                 }
                                 HStack {
                                     Text("Effort: ") +
