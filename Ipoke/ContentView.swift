@@ -24,13 +24,16 @@ struct ContentView: View {
                 VStack {
                     
                     Text("Ipoke")
-                        .font(.custom("Pokemon", size: 50))
+                        .frame(width: 300, height: 50)
+                        .font(.system(size: 50, design: .rounded))
+                        .bold()
                         .foregroundColor(Color.red)
                     List {
-                        ForEach(PokeC.resultIndAllFetch, id: \.name) { pokemon in
+                        ForEach(PokeC.resultData, id: \.name) { pokemon in
                             HStack {
-                                AsyncImage(url: URL(string: pokemon.sprites?.frontDefault ?? ""))
-                                Text("\(pokemon.name)")
+                                NavigationLink(destination: PokeDetail(URLGet: pokemon.url)) {
+                                    Text("\(pokemon.name)")
+                                }
                             }
                         }
                     }
@@ -39,9 +42,8 @@ struct ContentView: View {
                     ToolbarItem(placement: .navigationBarLeading) {
                         
                         
-                        if(PokeC.resultDataFetch!.previous == nil) {
+                        if(PokeC.resultDataFetch?.previous == nil) {
                             Button(action: {
-                                print(PokeC.resultIndAllFetch)
                                 offset -= limit
                                 page += -1
                                            
@@ -61,7 +63,7 @@ struct ContentView: View {
                         }
                     }
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        if(PokeC.resultDataFetch!.next == nil) {
+                        if(PokeC.resultDataFetch?.next == nil) {
                             
                             Button(action: {
                                 offset += limit
@@ -93,29 +95,6 @@ struct ContentView: View {
             }
         }
         .padding()
-    }
-    func getIndPoke(URLGet: String) -> String {
-        let url = URL(string: URLGet)!
-        
-        URLSession.shared.dataTask(with: url) { (data, res, error) in
-            if error != nil {
-                return print("Error in request data session: \(error!)")
-            }
-            
-            if let data = data {
-                do {
-                    let result: PokeIndModel = try JSONDecoder().decode(PokeIndModel.self, from: data);
-                    
-                    resultInd?.append(result)
-                    print(result.sprites!.frontDefault)
-                    print(resultInd)
-                } catch {
-                    return print("Error in Get Data Request: \(error)")
-                }
-            }
-            
-        }.resume()
-        return "opa"
     }
 
     func getTotalPages () -> Int{

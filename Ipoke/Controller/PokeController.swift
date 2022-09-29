@@ -11,8 +11,7 @@ import SwiftUI;
 class PokeController: ObservableObject {
     @Published var resultData: [PokeResultModel] = [];
     @Published var resultDataFetch: PokeFetch?;
-    @Published var resultIndAllFetch: [PokeFetchManiplation] = [];
-    
+    @Published var resultPokemonInd: PokeIndModel = PokeIndModel()
     init() {
         findAll()
     }
@@ -32,10 +31,6 @@ class PokeController: ObservableObject {
                     
                     self.resultData = result.results;
                     self.resultDataFetch = result;
-                    for a in self.resultData {
-                        self.findAllInd(URLGet: a.url)
-                        print(a.url)
-                    }
                 } catch {
                     return print("Error in Get Data Request: \(error)")
                     
@@ -46,27 +41,26 @@ class PokeController: ObservableObject {
         }.resume()
     }
     
-    func findAllInd(URLGet: String) {
-        let url = URL(string: URLGet)!
-        
-        URLSession.shared.dataTask(with: url) { (data, res, error) in
+    func findOne(url: String) {
+        guard let PokeURl = URL(string: url) else {
+            return print("URL Not Found")
+        }
+        URLSession.shared.dataTask(with: PokeURl) { (data, res, error) in
             if error != nil {
                 return print("Error in request data session: \(error!)")
             }
             
             if let data = data {
                 do {
-                    let decoder = JSONDecoder();
-                    
-                    //decoder.keyDecodingStrategy = .convertFromSnakeCase
-                    
-                    let result: PokeFetchManiplation = try decoder.decode(PokeFetchManiplation.self, from: data);
-                    print(result)
-                    self.resultIndAllFetch.append(result)
+                    let result: PokeIndModel = try JSONDecoder().decode(PokeIndModel.self, from: data);
+                    self.resultPokemonInd = result;
+                    print(self.resultPokemonInd)
                     
                 } catch {
                     return print("Error in Get Data Request: \(error)")
+                    
                 }
+                
             }
             
         }.resume()

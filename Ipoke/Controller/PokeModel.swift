@@ -14,19 +14,6 @@ struct PokeFetch: Codable {
     var results: [PokeResultModel] = [];
 }
 
-struct PokeFetchManiplation: Codable {
-    var name: String = "Name is Not Defined";
-    var height: Int?;
-    var baseExperience: Int?;
-    var sprites: PokeSpritesContentModel?;
-    private enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case height = "height"
-        case baseExperience = "base_experience"
-        case sprites = "sprites"
-    }
-}
-
 struct PokeResultModel: Codable {
     var name: String = "Name is Not Defined"
     var url: String = "URL is Not Defined"
@@ -34,9 +21,38 @@ struct PokeResultModel: Codable {
 
 struct PokeIndModel: Codable {
     var name: String = "Name is Not Defined"
-    var url: String = "URL is Not Defined"
     var base_experience: Int = 0;
     var sprites: PokeSpritesContentModel?;
+    var species: PokeSpecies?;
+    var stats: [PokeStats]?;
+    private enum CodingKeys: String, CodingKey {
+        case name = "name"
+        case base_experience = "base_experience"
+        case sprites = "sprites"
+        case species = "species"
+        case stats = "stats"
+    }
+}
+
+struct PokeSpecies: Codable {
+    var name: String = "Specie unique"
+    var url: String = "URL Species is not defined"
+}
+
+struct PokeStats: Codable {
+    var base_stat: Int = 0;
+    var effort: Int = 0;
+    var stat: PokeStatInd?;
+    private enum CodeKeys: String, CodingKey {
+        case base_stat = "base_stat"
+        case effort = "effort"
+        case stat = "stat"
+    }
+}
+
+struct PokeStatInd: Codable {
+    var name: String = "Stat Name is Not Defined"
+    var url: String = "URL Stat is Not Defined"
 }
 
 struct PokeSpritesContentModel: Codable {
