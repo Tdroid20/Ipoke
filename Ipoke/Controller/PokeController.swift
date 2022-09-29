@@ -53,9 +53,7 @@ class PokeController: ObservableObject {
             if let data = data {
                 do {
                     let result: PokeIndModel = try JSONDecoder().decode(PokeIndModel.self, from: data);
-                    self.resultPokemonInd = result;
-                    print(self.resultPokemonInd)
-                    
+                    self.resultPokemonInd = result;                    
                 } catch {
                     return print("Error in Get Data Request: \(error)")
                     

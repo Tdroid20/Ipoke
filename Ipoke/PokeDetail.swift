@@ -61,9 +61,10 @@ struct PokeDetail: View {
                         ForEach(PokeC.resultPokemonInd.stats ?? [], id: \.stat!.name) { item in
                             VStack(alignment: .leading) {
                                 HStack {
-                                    Text("\(item.stat!.name): ") +
-                                    Text("\(item.base_stat)")
-                                        .foregroundColor(.orange)
+                                    Text("\(item.stat!.name):") + Text(" \(item.base_stat)").foregroundColor(.green)
+                                    
+                                    ProgressView(value: Float(item.base_stat), total: 233)
+                                        .foregroundColor(.green)
                                 }
                                 HStack {
                                     Text("Effort: ") +
