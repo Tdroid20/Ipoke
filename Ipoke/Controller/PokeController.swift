@@ -12,6 +12,7 @@ class PokeController: ObservableObject {
     @Published var resultData: [PokeResultModel] = [];
     @Published var resultDataFetch: PokeFetch?;
     @Published var resultPokemonInd: PokeIndModel = PokeIndModel()
+    @Published var pokemons: [PokeIndModel] = []
     init() {
         findAll()
     }
@@ -31,6 +32,10 @@ class PokeController: ObservableObject {
                     
                     self.resultData = result.results;
                     self.resultDataFetch = result;
+                    self.pokemons = []
+                    result.results.forEach() { item in
+                        self.findOne(url: item.url)
+                    }
                 } catch {
                     return print("Error in Get Data Request: \(error)")
                     
@@ -53,7 +58,8 @@ class PokeController: ObservableObject {
             if let data = data {
                 do {
                     let result: PokeIndModel = try JSONDecoder().decode(PokeIndModel.self, from: data);
-                    self.resultPokemonInd = result;                    
+                    self.resultPokemonInd = result;
+                    self.pokemons.append(result)
                 } catch {
                     return print("Error in Get Data Request: \(error)")
                     

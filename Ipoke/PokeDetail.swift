@@ -8,21 +8,19 @@
 import SwiftUI;
 
 struct PokeDetail: View {
-    @EnvironmentObject var PokeC: PokeController;
-
     
-    var URLGet: String = "";
+    @State var pokemon: PokeIndModel = PokeIndModel()
     var body: some View {
         VStack {
-            Text("\(PokeC.resultPokemonInd.name)")
+            Text("\(pokemon.name.prefix(1).uppercased()+pokemon.name.dropFirst())")
                 .foregroundColor(.blue)
                 .frame(width: 200, height: 50)
-                .font(.system(size: 35, design: .rounded))
+                .font(.system(size: 25, design: .rounded))
                 .bold()
             Form() {
                 Section {
                 VStack {
-                    AsyncImage(url: URL(string: PokeC.resultPokemonInd.sprites.other.artWork.front_default)) { image in
+                    AsyncImage(url: URL(string: pokemon.sprites.other.artWork.front_default)) { image in
                         image.resizable()
                         
                     } placeholder: {
@@ -33,8 +31,6 @@ struct PokeDetail: View {
                         
                     
                         
-                }.onAppear() {
-                    PokeC.findOne(url: URLGet)
                 }
                 VStack(alignment: .leading) {
                     Text("Basic Information")
@@ -44,12 +40,12 @@ struct PokeDetail: View {
                     .padding(.bottom)
                     HStack {
                         Text("Experience: ") +
-                            Text("\(PokeC.resultPokemonInd.base_experience)")
+                            Text("\(pokemon.base_experience)")
                             .foregroundColor(.blue)
                     }
                     HStack {
                         Text("Specie: ") +
-                        Text("\(PokeC.resultPokemonInd.species?.name ?? "Specie Not Found")")
+                        Text("\(pokemon.species.name)")
                             .foregroundColor(.red)
                     }
                     
@@ -61,8 +57,8 @@ struct PokeDetail: View {
                         .frame(width: 320, alignment: .center)
                         .bold()
                     
-                    if PokeC.resultPokemonInd.stats != nil {
-                        ForEach(PokeC.resultPokemonInd.stats ?? [], id: \.stat!.name) { item in
+                    
+                        ForEach(pokemon.stats, id: \.stat!.name) { item in
                             VStack(alignment: .leading) {
                                 HStack {
                                     Text("\(item.stat!.name):") + Text(" \(item.base_stat)").foregroundColor(.green)
@@ -80,7 +76,6 @@ struct PokeDetail: View {
                                 Spacer()
                             }
                         }
-                    }
                     }
                 }
             }

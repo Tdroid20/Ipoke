@@ -43,12 +43,21 @@ struct ContentView: View {
                     } else {
                         
                         List {
-                            ForEach(PokeC.resultData, id: \.name) { pokemon in
+                            ForEach(Array(PokeC.pokemons.enumerated()), id:\.offset){ index, pokemon in
                                 HStack {
-                                    NavigationLink(destination: PokeDetail(URLGet: pokemon.url)) {
-                                        Text("\(pokemon.name)")
+                                    NavigationLink(destination: PokeDetail(pokemon: pokemon)) {
+                                        AsyncImage(url: URL(string: pokemon.sprites.other.artWork.front_default))
+                                            .scaleEffect(0.15)
+                                            .frame(width: 70, height: 50)
+                                        
+                                        Text("\(pokemon.name.prefix(1).uppercased()+pokemon.name.dropFirst())")
+                                            .foregroundColor(.blue)
+                                            .font(.system(size: 20,design: .rounded))
+                                            .bold()
+                                            .shadow(color: .cyan, radius: 7,x: 8,y: 8)
+                                            .frame(width: 200, alignment: .trailing)
                                     }
-                                }
+                                }.frame(width: 300, alignment: .trailing)
                             }
                         }
                     }

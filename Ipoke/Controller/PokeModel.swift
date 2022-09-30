@@ -23,8 +23,8 @@ struct PokeIndModel: Codable {
     var name: String = "Name is Not Defined"
     var base_experience: Int = 0;
     var sprites: Sprite = Sprite();
-    var species: PokeSpecies?;
-    var stats: [PokeStats]?;
+    var species: PokeSpecies = PokeSpecies();
+    var stats: [PokeStats] = [];
     private enum CodingKeys: String, CodingKey {
         case name = "name"
         case base_experience = "base_experience"
