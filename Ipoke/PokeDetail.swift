@@ -22,16 +22,17 @@ struct PokeDetail: View {
                 VStack {
                     AsyncImage(url: URL(string: pokemon.sprites.other.artWork.front_default)) { image in
                         image.resizable()
-                        
+                        .aspectRatio(contentMode: .fill)
                     } placeholder: {
                         Color(.gray)
                     }
-                        
-                        .frame(width: 350, height: 300, alignment: .center)
-                        
-                    
-                        
+                        .frame(width: 350, height: 330, alignment: .center)
+                        .background(Color("backColor"))
+                        .cornerRadius(20)
+                        .offset(y:-2)
                 }
+                .frame(height: 300)
+                    
                 VStack(alignment: .leading) {
                     Text("Basic Information")
                     .font(.system(.title))
